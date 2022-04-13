@@ -6,9 +6,9 @@ const initialState = {
     stateValue:  0 as number,
     wasPress: false as boolean
 }
-type InitialStateType = typeof initialState
 
-export const appReducer = (state: InitialStateType = initialState, action: ActionType) => {
+
+export const appReducer = (state = initialState, action: ActionType) => {
     switch (action.type) {
         case "START-VALUE": {
             return {...state, startValue: action.newNumber}

@@ -27,12 +27,10 @@ function App() {
     useEffect(() => {
         let maxValueStr = localStorage.getItem('maxValue')
         if (maxValueStr) {
-            // setMaxValue(JSON.parse(maxValueStr))
             dispatch(MaxValueAC(JSON.parse(maxValueStr)))
         }
         let startValueStr = localStorage.getItem('startValue')
         if (startValueStr) {
-            //setStartValue(JSON.parse(startValueStr))
             dispatch(StartValueAC(JSON.parse(startValueStr)))
         }
     }, [])
