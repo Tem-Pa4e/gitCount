@@ -1,38 +1,55 @@
 .App {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  text-align: center;
-  padding: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    text-align: center;
 }
 
 .counter {
-  border: 1px solid black;
-  padding: 5px;
-  width: 260px;
-  height: 180px;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 25px;
 }
 
 .countForm {
-  width: 240px;
-  height: 80px;
-
-  border: 1px solid black;
+    width: 240px;
+    height: 100px;
+    border: 1px solid black;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
+
 .changedForm {
-  margin-top: 5px;
-  width: 240px;
-  height: 80px;
-  border: 1px solid black;
-
+    width: 240px;
+    height: 50px;
+    margin-top: 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly
 }
+
 .errorCountForm {
-  width: 240px;
-  height: 80px;
-  border: 1px solid black;
-  color: red;
+    width: 240px;
+    height: 100px;
+    border: 1px solid black;
+    border-radius: 10px;
+    color: red;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 
 .errorInput {
-  background-color: red;
+    background-color: red;
 }

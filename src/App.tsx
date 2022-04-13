@@ -1,65 +1,84 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent, useEffect} from 'react';
 import './App.css';
+import {AdditionalCounter} from "./component/additionalCounter/AdditionCount";
+import {useDispatch, useSelector} from "react-redux";
+import {AppRootStateType} from "./component/state/store";
+import {
+    MaxValueAC,
+    StartValueAC,
+    StateValueAC,
+    WasPressAC
+} from "./component/state/app-reducer";
+import { Counter } from './component/counter/Counter';
+import {SettingCounter} from "./component/settingCounter/SettingCounter";
 
 function App() {
-    const [startValue, setStartValue] = useState(0)
-    const [maxValue, setMaxValue] = useState(5)
-    const [stateValue, setStateValue] = useState(startValue)
-    const [wasPress, setWasPress] = useState(false)
 
+    const startValue = useSelector<AppRootStateType, number>(state => state.app.startValue)
+    const maxValue = useSelector<AppRootStateType, number>(state => state.app.maxValue)
+    const stateValue = useSelector<AppRootStateType, number>(state => state.app.stateValue)
+    const wasPress = useSelector<AppRootStateType, boolean>(state => state.app.wasPress)
+    const dispatch = useDispatch()
 
+    const onClickButtonSet = () => {
+        dispatch(WasPressAC(false))
+    }
 
-    const changedState = () => {
-            setStateValue(stateValue + 1)
+    useEffect(() => {
+        let maxValueStr = localStorage.getItem('maxValue')
+        if (maxValueStr) {
+            // setMaxValue(JSON.parse(maxValueStr))
+            dispatch(MaxValueAC(JSON.parse(maxValueStr)))
+        }
+        let startValueStr = localStorage.getItem('startValue')
+        if (startValueStr) {
+            //setStartValue(JSON.parse(startValueStr))
+            dispatch(StartValueAC(JSON.parse(startValueStr)))
+        }
+    }, [])
+
+    const changeStateCount = () => {
+        dispatch(StateValueAC(stateValue + 1))
+            console.log('state', stateValue)
     }
     const resetValue = () => {
-        setStateValue(startValue)
+        dispatch(StateValueAC(startValue))
     }
     const onChangeStartValue = (e: ChangeEvent<HTMLInputElement>) => {
-        setStartValue(+e.currentTarget.value)
-        setWasPress(false)
-
+        dispatch(StartValueAC(+e.currentTarget.value))
+        dispatch(WasPressAC(false))
     }
     const onChangeMaxValue = (e: ChangeEvent<HTMLInputElement>) => {
-        setMaxValue(+e.currentTarget.value)
-        setWasPress(false)
+        dispatch(MaxValueAC(+e.currentTarget.value))
+        dispatch(WasPressAC(false))
     }
     const clickedFn = () => {
-        setStateValue(startValue)
-        setMaxValue(maxValue)
-        setWasPress(true)
+        dispatch(StateValueAC(startValue))
+        dispatch(MaxValueAC(maxValue))
+        dispatch(WasPressAC(true))
+        localStorage.setItem('maxValue', JSON.stringify(maxValue))
+        localStorage.setItem('startValue', JSON.stringify(startValue))
     }
-    let errorValue = startValue >= maxValue || startValue < 0
 
+    let errorValue = startValue >= maxValue || startValue < 0
 
     return (
         <div className="App">
             <div className={'counter'}>
-                <div className={stateValue === maxValue ? 'errorCountForm' : 'countForm'}>
-                    {/*{errorValue ? <div>Incorrect value</div> : stateValue }*/}
-                    {!wasPress ? 'Enter value and press set' && errorValue ? <div style={{color: 'red'}}>Incorrect value</div> :  'Enter value and press set' : stateValue }
-                </div>
-                <div className={'changedForm'}>
-                    <button disabled={stateValue === maxValue || !wasPress } onClick={changedState}>inc</button>
-                    <button disabled={!wasPress} onClick={resetValue}>reset</button>
-                </div>
+                <Counter stateValue={stateValue} maxValue={maxValue} wasPress={wasPress} errorValue={errorValue}
+                         changeStateCount={changeStateCount} resetValue={resetValue}/>
             </div>
             <div className={'counter'}>
-                <div className={'countForm'}>
-                <span>
-                    max value: <input className={maxValue === startValue ? 'errorInput' : ''} value={maxValue} onChange={onChangeMaxValue} type="number"/>
-                </span>
-                    <span>
-                    start value: <input className={!errorValue ? '' : 'errorInput' } value={startValue} onChange={onChangeStartValue} type="number"/>
-                </span>
-
-                </div>
-
-                <div className={'changedForm'}>
-                    <button disabled={maxValue === startValue || startValue < 0 || startValue > maxValue}
-                            onClick={clickedFn}>set
-                    </button>
-                </div>
+                <SettingCounter wasPress={wasPress} errorValue={errorValue} maxValue={maxValue} startValue={startValue}
+                                onChangeMaxValue={onChangeMaxValue} onChangeStartValue={onChangeStartValue}
+                                clickedFn={clickedFn}/>
+            </div>
+            <div className={'counter'}>
+                <AdditionalCounter setWasPress={onClickButtonSet} stateValue={stateValue} startValue={startValue}
+                                   maxValue={maxValue}
+                                   wasPress={wasPress} errorValue={errorValue} changeStateCount={changeStateCount}
+                                   resetValue={resetValue} clickedFn={clickedFn} onChangeMaxValue={onChangeMaxValue}
+                                   onChangeStartValue={onChangeStartValue}/>
             </div>
         </div>
     );
