@@ -1,11 +1,12 @@
 import React from 'react';
-import {Button} from "../button/Button";
+import {ButtonFr} from "../button/Button";
+
 
 interface CounterProps {
     stateValue: number
     maxValue: number
     wasPress: boolean
-    errorValue: boolean
+    setWasPress: () => void
     changeStateCount: () => void
     resetValue: () => void
 }
@@ -14,13 +15,11 @@ export const Counter = ({
                             stateValue,
                             maxValue,
                             wasPress,
-                            errorValue,
+                            setWasPress,
                             changeStateCount,
                             resetValue
                         }: CounterProps) => {
 
-    const countValue = !wasPress ? 'Enter value and press set' && errorValue ?
-        <div style={{color: 'red'}}>Incorrect value</div> : 'Enter value and press set' : stateValue
     const countClassName = stateValue === maxValue ? 'errorCountForm' : 'countForm'
     const incDisabled = stateValue === maxValue || !wasPress
     const resetDisabled = !wasPress
@@ -28,11 +27,12 @@ export const Counter = ({
     return (
         <>
             <div className={countClassName}>
-                {countValue}
+                {stateValue}
             </div>
             <div className={'changedForm'}>
-                <Button disabled={incDisabled} onClick={changeStateCount} title={'inc'}/>
-                <Button disabled={resetDisabled} onClick={resetValue} title={'reset'}/>
+                <ButtonFr disabled={incDisabled} onClick={changeStateCount} title={'inc'}/>
+                <ButtonFr disabled={resetDisabled} onClick={resetValue} title={'reset'}/>
+                <ButtonFr disabled={resetDisabled} onClick={setWasPress} title={'set'}/>
             </div>
         </>
     );

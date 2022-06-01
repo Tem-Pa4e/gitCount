@@ -1,5 +1,5 @@
 import React, {ChangeEvent} from 'react';
-import {Button} from "../button/Button";
+import { ButtonFr } from '../button/Button';
 import {ChangeSettingCounterForm} from "./changeSettingCounterForm/ChangeSettingCounterForm";
 
 interface SettingCounterProps {
@@ -35,7 +35,7 @@ export const SettingCounter = ({
                                           value={startValue} onChange={onChangeStartValue}/>
             </div>
             <div className={'changedForm'}>
-                <Button disabled={setDisabled} onClick={clickedFn} title={'set'}/>
+                <ButtonFr disabled={setDisabled} onClick={clickedFn} title={'set'}/>
             </div>
         </>
     );

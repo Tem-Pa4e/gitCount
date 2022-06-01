@@ -15,7 +15,7 @@ export const ChangeSettingCounterForm = ({
                                          }: SettingCounterFormProps) => {
     return (
         <span>
-                    {title}: <input className={className} value={value}
+                    {title}: <input style={{fontSize: 'large'}} className={className} value={value}
                                     onChange={onChange} type="number"/>
                 </span>
     );

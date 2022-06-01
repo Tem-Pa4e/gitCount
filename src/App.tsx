@@ -63,15 +63,6 @@ function App() {
     return (
         <div className="App">
             <div className={'counter'}>
-                <Counter stateValue={stateValue} maxValue={maxValue} wasPress={wasPress} errorValue={errorValue}
-                         changeStateCount={changeStateCount} resetValue={resetValue}/>
-            </div>
-            <div className={'counter'}>
-                <SettingCounter wasPress={wasPress} errorValue={errorValue} maxValue={maxValue} startValue={startValue}
-                                onChangeMaxValue={onChangeMaxValue} onChangeStartValue={onChangeStartValue}
-                                clickedFn={clickedFn}/>
-            </div>
-            <div className={'counter'}>
                 <AdditionalCounter setWasPress={onClickButtonSet} stateValue={stateValue} startValue={startValue}
                                    maxValue={maxValue}
                                    wasPress={wasPress} errorValue={errorValue} changeStateCount={changeStateCount}

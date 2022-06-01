@@ -1,6 +1,8 @@
 import React, {ChangeEvent} from 'react';
-import {Button} from "../button/Button";
+import {ButtonFr} from "../button/Button";
+import { Counter } from '../counter/Counter';
 import {ChangeSettingCounterForm} from "../settingCounter/changeSettingCounterForm/ChangeSettingCounterForm";
+import {SettingCounter} from "../settingCounter/SettingCounter";
 
 interface AdditionalCounterProps {
     stateValue: number
@@ -29,38 +31,19 @@ export const AdditionalCounter = ({
                                       resetValue, errorValue
                                   }: AdditionalCounterProps) => {
 
-    const countClassName = stateValue === maxValue ? 'errorCountForm' : 'countForm'
-    const incDisabled = stateValue === maxValue || !wasPress
-    const resetDisabled = !wasPress
-    const maxValueClassName = maxValue === startValue ? 'errorInput' : ''
-    const startValueClassName = !errorValue ? '' : 'errorInput'
-    const setDisabled = maxValue === startValue || startValue < 0 || startValue > maxValue || wasPress
-    return wasPress ?
-        <>
-            <div className={countClassName}>
-                {stateValue}
-            </div>
-            <div className={'changedForm'}>
-                <Button disabled={incDisabled} onClick={changeStateCount} title={'inc'}/>
-                <Button disabled={resetDisabled} onClick={resetValue} title={'reset'}/>
-                <Button disabled={resetDisabled} onClick={setWasPress} title={'set'}/>
-            </div>
-        </>
-        :
-        <>
-            <div className={'countForm'}>
-                <ChangeSettingCounterForm title={'max value'} className={maxValueClassName}
-                                          value={maxValue}
-                                          onChange={onChangeMaxValue}/>
-                <ChangeSettingCounterForm title={'start value'} className={startValueClassName}
-                                          value={startValue} onChange={onChangeStartValue}/>
-            </div>
-            <div className={'changedForm'}>
-                <Button disabled={setDisabled} onClick={clickedFn} title={'set'}/>
-            </div>
-        </>
-
-
+    return wasPress ? <Counter wasPress={wasPress}
+                               setWasPress={setWasPress}
+                               changeStateCount={changeStateCount}
+                               resetValue={resetValue}
+                               maxValue={maxValue}
+                               stateValue={stateValue}/>
+        : <SettingCounter maxValue={maxValue}
+                          startValue={startValue}
+                          onChangeMaxValue={onChangeMaxValue}
+                          onChangeStartValue={onChangeStartValue}
+                          clickedFn={clickedFn}
+                          errorValue={errorValue}
+                          wasPress={wasPress}/>
         ;
 };
 

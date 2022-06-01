@@ -1,4 +1,7 @@
 import React from 'react';
+import Button from '@mui/material/Button';
+
+
 
 interface ButtonProps {
     disabled: boolean
@@ -6,8 +9,8 @@ interface ButtonProps {
     title: string
 }
 
-export const Button = ({disabled,onClick,title}: ButtonProps) => {
+export const ButtonFr = ({disabled,onClick,title}: ButtonProps) => {
     return (
-        <button disabled={disabled} onClick={onClick}>{title}</button>
+        <Button style={{color: 'white', border: '1px solid white'}} variant={"outlined"} disabled={disabled} onClick={onClick}>{title}</Button>
     );
 };
