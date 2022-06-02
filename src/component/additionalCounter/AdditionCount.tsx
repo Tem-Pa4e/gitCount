@@ -1,8 +1,6 @@
 import React, {ChangeEvent} from 'react';
-import {ButtonFr} from "../button/Button";
-import { Counter } from '../counter/Counter';
-import {ChangeSettingCounterForm} from "../settingCounter/changeSettingCounterForm/ChangeSettingCounterForm";
-import {SettingCounter} from "../settingCounter/SettingCounter";
+import { Counter } from './counter/Counter';
+import {SettingCounter} from "./settingCounter/SettingCounter";
 
 interface AdditionalCounterProps {
     stateValue: number

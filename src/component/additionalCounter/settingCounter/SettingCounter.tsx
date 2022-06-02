@@ -1,5 +1,5 @@
 import React, {ChangeEvent} from 'react';
-import { ButtonFr } from '../button/Button';
+import { ButtonFr } from '../../button/Button';
 import {ChangeSettingCounterForm} from "./changeSettingCounterForm/ChangeSettingCounterForm";
 
 interface SettingCounterProps {

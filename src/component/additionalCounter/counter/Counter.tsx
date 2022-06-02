@@ -1,5 +1,5 @@
 import React from 'react';
-import {ButtonFr} from "../button/Button";
+import {ButtonFr} from "../../button/Button";
 
 
 interface CounterProps {

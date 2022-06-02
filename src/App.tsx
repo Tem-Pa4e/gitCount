@@ -9,8 +9,8 @@ import {
     StateValueAC,
     WasPressAC
 } from "./component/state/app-reducer";
-import { Counter } from './component/counter/Counter';
-import {SettingCounter} from "./component/settingCounter/SettingCounter";
+import { Counter } from './component/additionalCounter/counter/Counter';
+import {SettingCounter} from "./component/additionalCounter/settingCounter/SettingCounter";
 
 function App() {
 
